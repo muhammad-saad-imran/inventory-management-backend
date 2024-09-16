@@ -8,23 +8,23 @@ import {
   UUIDV4,
 } from "sequelize";
 import sequelize from "..";
-import Customer from "./Customer";
-import OrderDetail from "./OrderDetail";
+import Client from "./Client";
+import OrderItem from "./OrderItem";
 
 class Order extends Model<
   InferAttributes<Order>,
   InferCreationAttributes<Order>
 > {
   id!: string;
-  customerId!: ForeignKey<Customer["id"]>;
+  clientId!: ForeignKey<Client["id"]>;
   status!: string;
   orderDate!: Date;
   createdAt!: Date;
   updatedAt!: Date;
 
   /** Association attributes */
-  customer!: NonAttribute<Customer>;
-  orderDetails!: NonAttribute<OrderDetail[]>;
+  client!: NonAttribute<Client>;
+  orderItems!: NonAttribute<OrderItem[]>;
 }
 
 /**
@@ -62,9 +62,9 @@ Order.init(
 /**
  * Define Order associations
  */
-Order.belongsTo(Customer);
+Order.belongsTo(Client);
 
-Order.hasMany(OrderDetail, {
+Order.hasMany(OrderItem, {
   foreignKey: "orderId",
 });
 

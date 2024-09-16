@@ -9,9 +9,9 @@ import {
 import sequelize from "..";
 import Order from "./Order";
 
-class Customer extends Model<
-  InferAttributes<Customer>,
-  InferCreationAttributes<Customer>
+class Client extends Model<
+  InferAttributes<Client>,
+  InferCreationAttributes<Client>
 > {
   id!: string;
   name!: string;
@@ -25,9 +25,9 @@ class Customer extends Model<
 }
 
 /**
- * Initialize Customer model
+ * Initialize Client model
  */
-Customer.init(
+Client.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -55,16 +55,16 @@ Customer.init(
   },
   {
     sequelize,
-    tableName: "customers",
+    tableName: "clients",
     timestamps: true,
   }
 );
 
 /**
- * Customer associations
+ * Client associations
  */
-Customer.hasMany(Order, {
-  foreignKey: "customerId",
+Client.hasMany(Order, {
+  foreignKey: "clientId",
 });
 
-export default Customer;
+export default Client;

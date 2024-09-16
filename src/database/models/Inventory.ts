@@ -10,7 +10,7 @@ import {
 import sequelize from "..";
 import Supplier from "./Supplier";
 import Product from "./Product";
-import OrderDetail from "./OrderDetail";
+import OrderItem from "./OrderItem";
 
 class Inventory extends Model<
   InferAttributes<Inventory>,
@@ -28,7 +28,7 @@ class Inventory extends Model<
   /** Association attributes */
   supplier!: NonAttribute<Supplier>;
   product!: NonAttribute<Product>;
-  orderDetails!: NonAttribute<OrderDetail[]>;
+  orderItems!: NonAttribute<OrderItem[]>;
 }
 
 /**
@@ -73,7 +73,7 @@ Inventory.init(
 Inventory.belongsTo(Supplier);
 Inventory.belongsTo(Product);
 
-Inventory.hasMany(OrderDetail, {
+Inventory.hasMany(OrderItem, {
   foreignKey: "inventoryId",
 });
 

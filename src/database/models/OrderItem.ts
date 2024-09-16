@@ -10,9 +10,9 @@ import Order from "./Order";
 import Inventory from "./Inventory";
 import sequelize from "..";
 
-class OrderDetail extends Model<
-  InferAttributes<OrderDetail>,
-  InferCreationAttributes<OrderDetail>
+class OrderItem extends Model<
+  InferAttributes<OrderItem>,
+  InferCreationAttributes<OrderItem>
 > {
   orderId!: ForeignKey<Order["id"]>;
   inventoryId!: ForeignKey<Inventory["id"]>;
@@ -27,9 +27,9 @@ class OrderDetail extends Model<
 }
 
 /**
- * Initialize OrderDetail Model
+ * Initialize OrderItem Model
  */
-OrderDetail.init(
+OrderItem.init(
   {
     orderId: {
       type: DataTypes.UUID,
@@ -56,15 +56,15 @@ OrderDetail.init(
   },
   {
     sequelize,
-    tableName: "orderDetail",
+    tableName: "orderItems",
     timestamps: true,
   }
 );
 
 /**
- * Define OrderDetail associations
+ * Define OrderItem associations
  */
-OrderDetail.belongsTo(Order);
-OrderDetail.belongsTo(Inventory);
+OrderItem.belongsTo(Order);
+OrderItem.belongsTo(Inventory);
 
-export default OrderDetail;
+export default OrderItem;

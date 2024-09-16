@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 const startServer = async (): Promise<void> => {
   try {
-    await sequelize.authenticate(); // Synchronizes the database with the defined models
+    await sequelize.authenticate(); // Authenticates the database connection
     app.listen(PORT, () => {
       // Starts the server on port
       console.log("Server started on port", PORT);
