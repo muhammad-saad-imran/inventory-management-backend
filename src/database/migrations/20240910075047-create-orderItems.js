@@ -4,10 +4,10 @@
 module.exports = {
   /**
    * Run the migration (up method).
-   * This creates the 'orderDetails' table with the specified columns.
+   * This creates the 'orderItems' table with the specified columns.
    */
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('orderDetails', {
+    await queryInterface.createTable('orderItems', {
       orderId: {
         type: Sequelize.UUID,
         allowNull: false,
@@ -53,9 +53,9 @@ module.exports = {
 
   /**
    * Reverse the migration (down method).
-   * This drops the 'orderDetails' table.
+   * This drops the 'orderItems' table.
    */
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('orderDetails');
+    await queryInterface.dropTable('orderItems');
   },
 };

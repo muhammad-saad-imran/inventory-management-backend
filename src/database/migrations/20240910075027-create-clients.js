@@ -4,10 +4,10 @@
 module.exports = {
   /**
    * Run the migration (up method).
-   * This creates the 'customers' table with the specified columns.
+   * This creates the 'Clients' table with the specified columns.
    */
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('customers', {
+    await queryInterface.createTable('clients', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -41,9 +41,9 @@ module.exports = {
 
   /**
    * Reverse the migration (down method).
-   * This drops the 'customers' table.
+   * This drops the 'Clients' table.
    */
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('customers');
+    await queryInterface.dropTable('clients');
   },
 };

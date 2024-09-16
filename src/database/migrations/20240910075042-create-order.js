@@ -14,12 +14,12 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      customerId: {
+      clientId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'customers', // Table name
-          key: 'id',          // Reference column in customers table
+          model: 'clients', // Table name
+          key: 'id',        // Reference column in Clients table
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
