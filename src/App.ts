@@ -6,15 +6,8 @@ export class App {
   app: Express = express();
 
   constructor() {
-    this.loadModules();
     this.setupMiddlewares();
     this.setupRoutes();
-  }
-
-  private loadModules() {
-    /**
-     * loads all controllers, services, routes, etc..
-     */
   }
 
   private setupRoutes() {
