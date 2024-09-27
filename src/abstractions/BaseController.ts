@@ -1,21 +1,22 @@
 import { Request, Response } from "express";
 import { Model } from "sequelize";
 import { ZodType } from "zod";
-import { IConroller } from "./IController";
-import { BaseService } from "./BaseService";
+import IConroller from "./IController";
+import BaseService from "./BaseService";
 import { handleResponse } from "../utils/helpers.utils";
+import { ZodSchema } from "../type";
 
-export abstract class BaseController<T extends Model> implements IConroller {
-  constructor(
-    private service: BaseService<T>,
-    private createSchema: ZodType,
-    private updateSchema: ZodType,
-    private querySchema: ZodType
-  ) {}
+export default abstract class BaseController<T extends Model>
+  implements IConroller
+{
+  private updateSchema: ZodType;
+
+  constructor(private service: BaseService<T>, protected schema: ZodSchema) {
+    this.updateSchema = schema.partial();
+  }
 
   async get(req: Request, res: Response): Promise<void> {
-    this.querySchema.parse(req.query);
-    const entity = this.service.get(req.query.id as string);
+    const entity = this.service.get(req.params.id);
     handleResponse(res, entity);
   }
 
@@ -25,21 +26,19 @@ export abstract class BaseController<T extends Model> implements IConroller {
   }
 
   async create(req: Request, res: Response): Promise<void> {
-    this.createSchema.parse(req.body);
+    this.schema.parse(req.body);
     const newEntity = this.service.create(req.body);
     handleResponse(res, newEntity, 201);
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    this.querySchema.parse(req.query);
     this.updateSchema.parse(req.body);
-    const updatedEntity = this.service.update(req.query.id as string, req.body);
+    const updatedEntity = this.service.update(req.params.id, req.body);
     handleResponse(res, updatedEntity);
   }
 
   async delete(req: Request, res: Response): Promise<void> {
-    this.querySchema.parse(req.query);
-    this.service.delete(req.query.id as string);
+    this.service.delete(req.params.id);
     handleResponse(res);
   }
 }
