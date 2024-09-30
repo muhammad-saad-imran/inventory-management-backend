@@ -4,7 +4,7 @@ import BaseController from "../../abstractions/BaseController";
 import AuthService from "./auth.service";
 import { userSchema } from "../Users/user.validation";
 import { loginSchema } from "./auth.validtion";
-import { handleResponse } from "../../utils/helpers.utils";
+import { handleResponse } from "../../utils/route.utils";
 
 export default class AuthController extends BaseController<User> {
   constructor(private authService: AuthService) {

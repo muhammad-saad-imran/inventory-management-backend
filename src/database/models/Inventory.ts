@@ -70,11 +70,22 @@ Inventory.init(
 /**
  * Define Inventory associations
  */
-Inventory.belongsTo(Supplier);
-Inventory.belongsTo(Product);
+Supplier.hasMany(Inventory, {
+  foreignKey: "supplierId",
+  as: "inventory_supplier",
+});
+Inventory.belongsTo(Supplier, {
+  foreignKey: "supplierId",
+  as: "inventory_supplier",
+});
 
-Inventory.hasMany(OrderItem, {
-  foreignKey: "inventoryId",
+Product.hasMany(Inventory, {
+  foreignKey: "productId",
+  as: "inventory_product",
+});
+Inventory.belongsTo(Product, {
+  foreignKey: "productId",
+  as: "inventory_product",
 });
 
 export default Inventory;

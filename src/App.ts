@@ -1,9 +1,10 @@
 import express, { Express } from "express";
 import sequelize from "./database";
-import { handleErrors } from "./utils/error.utils";
+import { handleErrors } from "./utils/route.utils";
 import "express-async-errors";
 import authRouter from "./features/Authorization/auth.route";
 import userRouter from "./features/Users/user.route";
+import productRouter from "./features/Product/product.route";
 
 export class App {
   private app: Express = express();
@@ -22,10 +23,7 @@ export class App {
   private setupRoutes() {
     this.app.use("/api/auth", authRouter);
     this.app.use("/api/user", userRouter);
-    // Only for testing, to be removed after testing setup
-    this.app.get("/", (req, res) => {
-      res.send("Hello, World!");
-    });
+    this.app.use("/api/product", productRouter);
   }
 
   private setupMiddlewares() {

@@ -64,7 +64,22 @@ OrderItem.init(
 /**
  * Define OrderItem associations
  */
-OrderItem.belongsTo(Order);
-OrderItem.belongsTo(Inventory);
+Order.hasMany(OrderItem, {
+  foreignKey: "orderId",
+  as: "orderItem_order",
+});
+OrderItem.belongsTo(Order, {
+  foreignKey: "orderId",
+  as: "orderItem_order",
+});
+
+Inventory.hasMany(OrderItem, {
+  foreignKey: "inventoryId",
+  as: "orderItem_inventory",
+});
+OrderItem.belongsTo(Inventory, {
+  foreignKey: "inventoryId",
+  as: "orderItem_inventory",
+});
 
 export default OrderItem;

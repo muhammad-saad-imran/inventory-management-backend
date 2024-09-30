@@ -55,11 +55,4 @@ Product.init(
   }
 );
 
-/**
- * Product associations
- */
-Product.hasMany(Inventory, {
-  foreignKey: "productId",
-});
-
 export default Product;

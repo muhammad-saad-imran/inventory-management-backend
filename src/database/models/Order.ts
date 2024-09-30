@@ -62,10 +62,13 @@ Order.init(
 /**
  * Define Order associations
  */
-Order.belongsTo(Client);
-
-Order.hasMany(OrderItem, {
-  foreignKey: "orderId",
+Client.hasMany(Order, {
+  foreignKey: "clientId",
+  as: "order_client",
+});
+Order.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "order_client",
 });
 
 export default Order;

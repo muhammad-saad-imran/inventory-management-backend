@@ -7,16 +7,12 @@ export default function validateUserMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      throw new UnauthorizedError("Authorization token is required ");
-    }
-
-    const decoded = verifyToken(token);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    throw error;
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    throw new UnauthorizedError("Authorization token is required ");
   }
+
+  const decoded = verifyToken(token);
+  req.userId = decoded.userId;
+  next();
 }

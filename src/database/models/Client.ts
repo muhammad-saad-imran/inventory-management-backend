@@ -60,11 +60,4 @@ Client.init(
   }
 );
 
-/**
- * Client associations
- */
-Client.hasMany(Order, {
-  foreignKey: "clientId",
-});
-
 export default Client;

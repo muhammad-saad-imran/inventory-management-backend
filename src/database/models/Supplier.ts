@@ -60,11 +60,4 @@ Supplier.init(
   }
 );
 
-/**
- * Supplier associations
- */
-Supplier.hasMany(Inventory, {
-  foreignKey: "supplierId",
-});
-
 export default Supplier;
