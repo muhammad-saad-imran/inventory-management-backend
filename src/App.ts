@@ -6,6 +6,7 @@ import authRouter from "./features/Authorization/auth.route";
 import userRouter from "./features/Users/user.route";
 import productRouter from "./features/Product/product.route";
 import supplierRouter from "./features/Supplier/supplier.route";
+import clientRouter from "./features/Client/client.route";
 
 export class App {
   private app: Express = express();
@@ -26,6 +27,7 @@ export class App {
     this.app.use("/api/user", userRouter);
     this.app.use("/api/product", productRouter);
     this.app.use("/api/supplier", supplierRouter);
+    this.app.use("/api/client", clientRouter);
   }
 
   private setupMiddlewares() {
