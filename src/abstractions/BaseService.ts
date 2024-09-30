@@ -31,7 +31,7 @@ export default abstract class BaseService<T extends Model>
   }
 
   async delete(id: string): Promise<T> {
-    const entity = this.get(id);
+    const entity = await this.get(id);
     await this.model.destroy({ where: { id } as WhereOptions });
     return entity;
   }

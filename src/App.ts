@@ -5,6 +5,7 @@ import "express-async-errors";
 import authRouter from "./features/Authorization/auth.route";
 import userRouter from "./features/Users/user.route";
 import productRouter from "./features/Product/product.route";
+import supplierRouter from "./features/Supplier/supplier.route";
 
 export class App {
   private app: Express = express();
@@ -24,6 +25,7 @@ export class App {
     this.app.use("/api/auth", authRouter);
     this.app.use("/api/user", userRouter);
     this.app.use("/api/product", productRouter);
+    this.app.use("/api/supplier", supplierRouter);
   }
 
   private setupMiddlewares() {
