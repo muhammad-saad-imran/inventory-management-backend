@@ -10,14 +10,6 @@ declare global {
   }
 }
 
-export enum HTTP_METHOD {
-  GET,
-  POST,
-  PUT,
-  PATCH,
-  DELETE,
-}
-
 export type ModelClass<T extends Model> = { new (): T } & typeof Model<
   Attributes<T>,
   CreationAttributes<T>

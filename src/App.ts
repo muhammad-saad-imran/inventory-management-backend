@@ -7,6 +7,7 @@ import userRouter from "./features/Users/user.route";
 import productRouter from "./features/Product/product.route";
 import supplierRouter from "./features/Supplier/supplier.route";
 import clientRouter from "./features/Client/client.route";
+import inventoryRouter from "./features/Inventory/inventory.route";
 
 export class App {
   private app: Express = express();
@@ -28,6 +29,7 @@ export class App {
     this.app.use("/api/product", productRouter);
     this.app.use("/api/supplier", supplierRouter);
     this.app.use("/api/client", clientRouter);
+    this.app.use("/api/inventory", inventoryRouter);
   }
 
   private setupMiddlewares() {

@@ -64,11 +64,12 @@ Order.init(
  */
 Client.hasMany(Order, {
   foreignKey: "clientId",
-  as: "order_client",
+  // as: "order_client",
 });
 Order.belongsTo(Client, {
   foreignKey: "clientId",
-  as: "order_client",
+  // as: "order_client",
 });
 
 export default Order;
+// 

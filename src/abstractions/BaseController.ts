@@ -9,7 +9,7 @@ import { ZodSchema } from "../type";
 export default abstract class BaseController<T extends Model>
   implements IConroller
 {
-  private updateSchema: ZodType;
+  protected updateSchema: ZodType;
 
   constructor(private service: BaseService<T>, protected schema: ZodSchema) {
     this.updateSchema = schema.partial();
