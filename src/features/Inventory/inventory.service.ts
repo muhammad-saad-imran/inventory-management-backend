@@ -1,4 +1,4 @@
-import { CreationAttributes, Attributes } from "sequelize";
+import { CreationAttributes, Attributes, Transaction } from "sequelize";
 import BaseService from "../../abstractions/BaseService";
 import Inventory from "../../database/models/Inventory";
 import ProductService from "../Product/product.service";
@@ -29,44 +29,38 @@ export default class InventoryService extends BaseService<Inventory> {
   }
 
   override async create(
-    newInventory: CreationAttributes<Inventory>
+    newInventory: CreationAttributes<Inventory>,
+    transaction?: Transaction
   ): Promise<Inventory> {
     const product = await this.productService.get(newInventory.productId);
-    if (!product) {
-      throw new BadRequestError("Product not found");
-    }
     const supplier = await this.supplierService.get(newInventory.supplierId);
-    if (!supplier) {
-      throw new BadRequestError("Supplier not found");
-    }
-    return super.create(newInventory);
+    return super.create(newInventory, transaction);
   }
 
   override async update(
     id: string,
-    updateValues: Partial<Attributes<Inventory>>
+    updateValues: Partial<Attributes<Inventory>>,
+    transaction?: Transaction
   ): Promise<Inventory> {
     if (updateValues.productId) {
       const product = await this.productService.get(updateValues.productId);
-      if (!product) {
-        throw new BadRequestError("Product not found");
-      }
     }
     if (updateValues.supplierId) {
       const supplier = await this.supplierService.get(updateValues.supplierId);
-      if (!supplier) {
-        throw new BadRequestError("Supplier not found");
-      }
     }
-    return super.update(id, updateValues);
+    return super.update(id, updateValues, transaction);
   }
 
-  async updateStock(id: string, updateValue: UpdateStock) {
+  async updateStock(
+    id: string,
+    updateValue: UpdateStock,
+    transaction?: Transaction
+  ) {
     const inventory = await this.get(id);
     const { change } = updateValue;
     if (change < 0 && inventory.stock + change < 0) {
       throw new BadRequestError("Not enough stock available");
     }
-    return this.update(id, { stock: inventory.stock + change });
+    return this.update(id, { stock: inventory.stock + change }, transaction);
   }
 }

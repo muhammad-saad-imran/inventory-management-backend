@@ -11,10 +11,10 @@ export default class InventoryController extends BaseController<Inventory> {
   }
 
   async updateStock(req: Request, res: Response) {
-    changeStockSchema.parse(req.body);
+    const changeStock: any = changeStockSchema.parse(req.body);
     const inventory = await this.inventoryService.updateStock(
       req.params.id,
-      req.body
+      changeStock
     );
     handleResponse(res, inventory);
   }

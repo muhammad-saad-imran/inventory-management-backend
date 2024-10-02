@@ -23,7 +23,6 @@ export function handleErrors(
   }
 }
 
-
 export function handleResponse(
   res: Response,
   data: any = {},

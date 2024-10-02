@@ -12,14 +12,14 @@ export default class AuthController extends BaseController<User> {
   }
 
   override async create(req: Request, res: Response): Promise<void> {
-    this.schema.parse(req.body);
-    const newUser = await this.authService.signup(req.body);
-    handleResponse(res, newUser, 201);
+    const newUser: any = this.schema.parse(req.body);
+    const createdUser = await this.authService.signup(newUser);
+    handleResponse(res, createdUser, 201);
   }
 
   async login(req: Request, res: Response): Promise<void> {
-    loginSchema.parse(req.body);
-    const token = await this.authService.login(req.body);
+    const creds: any = loginSchema.parse(req.body);
+    const token = await this.authService.login(creds);
     handleResponse(res, { token });
   }
 }

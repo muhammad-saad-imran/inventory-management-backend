@@ -26,14 +26,17 @@ export default abstract class BaseController<T extends Model>
   }
 
   async create(req: Request, res: Response): Promise<void> {
-    this.schema.parse(req.body);
-    const newEntity = await this.service.create(req.body);
+    const createEntity: any = this.schema.parse(req.body);
+    const newEntity = await this.service.create(createEntity);
     handleResponse(res, newEntity, 201);
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    this.updateSchema.parse(req.body);
-    const updatedEntity = await this.service.update(req.params.id, req.body);
+    const updateEntity: any = this.updateSchema.parse(req.body);
+    const updatedEntity = await this.service.update(
+      req.params.id,
+      updateEntity
+    );
     handleResponse(res, updatedEntity);
   }
 

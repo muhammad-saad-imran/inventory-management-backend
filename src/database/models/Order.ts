@@ -54,7 +54,7 @@ Order.init(
   },
   {
     sequelize,
-    tableName: "order",
+    tableName: "orders",
     timestamps: true,
   }
 );
@@ -64,12 +64,9 @@ Order.init(
  */
 Client.hasMany(Order, {
   foreignKey: "clientId",
-  // as: "order_client",
 });
 Order.belongsTo(Client, {
   foreignKey: "clientId",
-  // as: "order_client",
 });
 
 export default Order;
-// 
