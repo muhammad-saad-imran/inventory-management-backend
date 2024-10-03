@@ -1,0 +1,5 @@
+export enum ORDER_STATUS {
+  PENDING = "PENDING",
+  SHIPPED = "SHIPPED",
+  CANCELLED = "CANCELLED",
+}
